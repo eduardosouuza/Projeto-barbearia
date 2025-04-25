@@ -1,0 +1,638 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 267 75% 40%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 267 75% 95%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 267 75% 40%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 267 75% 50%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 267 75% 16%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 267 75% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Efeitos de gradiente e fundo */
+.hero-gradient {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(76, 29, 149, 0.6));
+}
+
+/* Animações personalizadas */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
+}
+
+/* Efeitos de texto */
+.text-glow {
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #f5f5f5, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 200%;
+  animation: gradientFlow 3s ease infinite;
+}
+
+/* Efeitos de cartão e botões */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(76, 29, 149, 0.1);
+}
+
+.button-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.button-glow:hover {
+  animation: glow 1.5s infinite;
+}
+
+.button-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0));
+  transform: rotate(30deg);
+  transition: transform 0.5s ease;
+}
+
+.button-glow:hover::before {
+  transform: rotate(0deg);
+}
+
+/* Efeitos de imagem */
+.image-zoom {
+  overflow: hidden;
+}
+
+.image-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.image-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* Efeitos scroll */
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efeito de navbar sticky */
+.navbar-sticky {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+}
+
+/* Efeito para o login */
+.login-card {
+  backdrop-filter: blur(10px);
+  background-color: rgba(23, 23, 23, 0.7);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+/* Animação para destaque de conteúdo */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientFlow 3s ease infinite;
+}
+
+.service-card-hover {
+  transition: all 0.3s ease;
+}
+
+.service-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(76, 29, 149, 0.3);
+}
+
+.info-card-hover {
+  transition: all 0.3s ease;
+}
+
+.info-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -5px rgba(76, 29, 149, 0.25);
+}
+
+.testimonial-card-hover {
+  transition: all 0.3s ease;
+}
+
+.testimonial-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -5px rgba(76, 29, 149, 0.25);
+}
+
+.admin-sidebar {
+  background: linear-gradient(180deg, #1a1a1a 0%, #2d1b69 100%);
+}
+
+.admin-card {
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -5px rgba(76, 29, 149, 0.25);
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(76, 29, 149, 0.1) 0%, rgba(76, 29, 149, 0.2) 100%);
+  border: 1px solid rgba(76, 29, 149, 0.3);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -5px rgba(76, 29, 149, 0.25);
+}
+
+.chart-container {
+  height: 300px;
+  width: 100%;
+}
+
+.time-slot {
+  transition: all 0.2s ease;
+}
+
+.time-slot:hover:not(.time-slot-disabled):not(.time-slot-selected) {
+  background-color: rgba(76, 29, 149, 0.1);
+  border-color: rgba(76, 29, 149, 0.5);
+}
+
+.time-slot-selected {
+  background-color: rgba(76, 29, 149, 0.2);
+  border-color: rgba(76, 29, 149, 0.8);
+}
+
+.time-slot-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos ImperialCuts */
+.imperial-gradient {
+  background: linear-gradient(to bottom, #000000, #2d1b69);
+}
+
+.imperial-card {
+  background: linear-gradient(to bottom right, #1a1a1a, #2d1b69);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.imperial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -5px rgba(139, 92, 246, 0.25);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.imperial-button {
+  background: linear-gradient(to right, #6d28d9, #4c1d95);
+  transition: all 0.3s ease;
+}
+
+.imperial-button:hover {
+  background: linear-gradient(to right, #7c3aed, #5b21b6);
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px -5px rgba(139, 92, 246, 0.4);
+}
+
+.imperial-input {
+  background-color: #1f1f1f;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.imperial-input:focus {
+  border-color: rgba(139, 92, 246, 0.7);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+.imperial-icon-container {
+  background-color: rgba(139, 92, 246, 0.2);
+  border-radius: 9999px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.imperial-icon-container:hover {
+  background-color: rgba(139, 92, 246, 0.3);
+}
+
+.imperial-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.imperial-table th {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(139, 92, 246, 0.8);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.imperial-table tr {
+  transition: all 0.2s ease;
+}
+
+.imperial-table tr:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+.imperial-calendar .rdp-day_selected {
+  background-color: #6d28d9 !important;
+  color: white !important;
+}
+
+.imperial-calendar .rdp-day_today {
+  background-color: rgba(139, 92, 246, 0.2) !important;
+  color: white !important;
+}
+
+.imperial-calendar .rdp-button:hover:not([disabled]) {
+  background-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+.imperial-calendar .rdp-head_cell {
+  color: rgba(139, 92, 246, 0.8) !important;
+  font-weight: 500;
+}
+
+.imperial-calendar .rdp-nav_button {
+  color: rgba(139, 92, 246, 0.8) !important;
+}
+
+.imperial-calendar .rdp-caption {
+  color: white;
+  font-weight: 500;
+}
+
+/* Estilos adicionais para o calendário de agendamentos */
+.imperial-calendar [aria-selected="true"] {
+  background-color: rgb(147, 51, 234) !important;
+  color: white !important;
+}
+
+.imperial-calendar .rdp-day_with_appointment {
+  position: relative;
+}
+
+.imperial-calendar .rdp-day_with_appointment::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgb(192, 132, 252);
+}
+
+.imperial-calendar .rdp-day_with_many_appointments::after {
+  width: 6px;
+  height: 6px;
+}
+
+.imperial-calendar .rdp-day_selected.rdp-day_with_appointment::after {
+  background-color: white;
+}
+
+/* Correções para o layout do calendário */
+.imperial-calendar .rdp-months {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.imperial-calendar .rdp-month {
+  width: 100%;
+}
+
+.imperial-calendar .rdp-table {
+  width: 100%;
+  margin: 0;
+}
+
+.imperial-calendar .rdp-head_row,
+.imperial-calendar .rdp-row {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.imperial-calendar .rdp-head_cell,
+.imperial-calendar .rdp-cell {
+  width: auto !important;
+  text-align: center !important;
+  padding: 2px !important;
+  height: auto !important;
+  aspect-ratio: 1 !important;
+}
+
+.imperial-calendar .rdp-button {
+  width: 100% !important;
+  height: 100% !important;
+  font-size: 0.875rem !important;
+  border-radius: 0.375rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+.imperial-calendar .rdp-caption {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-bottom: 0.5rem !important;
+  position: relative !important;
+  padding: 0 1rem !important;
+}
+
+.imperial-calendar .rdp-nav {
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  gap: 0.25rem !important;
+}
+
+.imperial-calendar .rdp-tbody {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+}
+
+@media (max-width: 640px) {
+  .imperial-calendar .rdp-button {
+    font-size: 0.75rem !important;
+  }
+  
+  .imperial-calendar .rdp-head_cell {
+    font-size: 0.7rem !important;
+  }
+}
+
+/* Add these styles at the end of the file */
+
+/* IMPERIAL CUTS Specific Styles */
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.imperial-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgb(126 34 206);
+}
+
+.imperial-logo {
+  width: 3rem;
+  height: 3rem;
+  color: rgb(168 85 247);
+}
+
+.imperial-nav-link {
+  position: relative;
+  transition-duration: 300ms;
+}
+
+.imperial-nav-link:hover {
+  color: rgb(192 132 252);
+}
+
+.imperial-nav-link span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background-color: rgb(168 85 247);
+  transition: all 300ms;
+}
+
+.imperial-nav-link:hover span {
+  width: 100%;
+}
+
+.imperial-button {
+  background-color: rgb(126 34 206);
+  transition-duration: 300ms;
+  transform-origin: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.imperial-button:hover {
+  background-color: rgb(147 51 234);
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(126, 34, 206, 0.4), 0 4px 6px -4px rgba(126, 34, 206, 0.4);
+}
+
+.imperial-outline-button {
+  border: 2px solid rgb(168 85 247);
+  transition-duration: 300ms;
+  transform-origin: center;
+}
+
+.imperial-outline-button:hover {
+  background-color: rgba(88, 28, 135, 0.4);
+  transform: scale(1.05);
+}
+
+.imperial-card {
+  background-image: linear-gradient(to bottom right, rgb(17 24 39), rgb(59 7 100));
+  border: 1px solid rgba(107, 33, 168, 0.3);
+  transition-duration: 300ms;
+}
+
+.imperial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(126, 34, 206, 0.2), 0 4px 6px -4px rgba(126, 34, 206, 0.2);
+}
+
+.imperial-icon-container {
+  background-color: rgba(126, 34, 206, 0.2);
+  transition-duration: 300ms;
+}
+
+.group:hover .imperial-icon-container {
+  background-color: rgba(147, 51, 234, 0.3);
+}
+
+.imperial-hero-image {
+  box-shadow: 0 25px 50px -12px rgba(88, 28, 135, 0.6);
+  transition-duration: 500ms;
+}
+
+.imperial-hero-image:hover {
+  transform: scale(1.02);
+}
+
+.imperial-rating-card {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgb(126 34 206);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  transition-duration: 500ms;
+}
+
+.imperial-rating-card:hover {
+  transform: scale(1.05);
+}
+
+.imperial-rating-icon {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 9999px;
+  background-color: rgb(147 51 234);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imperial-form-input {
+  width: 100%;
+  background-color: rgb(17 24 39);
+  border: 1px solid rgb(126 34 206);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  transition-duration: 300ms;
+}
+
+.imperial-form-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.5);
+  border-color: rgb(168 85 247);
+}
+
+.imperial-step-number {
+  background-color: rgb(126 34 206);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
